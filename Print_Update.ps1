@@ -5,7 +5,7 @@ if($os_ver -eq "10.0.14393"){
    Reg Add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLU /t REG_DWORD /d 1 /f
    Reg Add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v NoWarningNoElevationOnInstall /t REG_DWORD /d 0 /f
    Reg Add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v NoWarningNoElevationOnUpdate /t REG_DWORD /d 0 /f
-   curl.exe --insecure --ssl-no-revoke --url "http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/07/windows10.0-kb5004948-x64_206b586ca8f1947fdace0008ecd7c9ca77fd6876.msu" -o "c:/temp/patch/kb5004948.msu"  
+   wget "http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/07/windows10.0-kb5004948-x64_206b586ca8f1947fdace0008ecd7c9ca77fd6876.msu" -o "c:/temp/patch/kb5004948.msu"  
    Set-Service -Name "wuauserv" -StartupType Manual
    Start-Process -FilePath "wusa.exe" -ArgumentList "c:/temp/patch/kb5004948.msu /quiet /norestart" -Wait
    Reg Add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v RestrictDriverInstallationToAdministrators /t REG_DWORD /d 1 /f 
